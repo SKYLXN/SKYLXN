@@ -1,0 +1,23 @@
+name: GitHub-Profile-Summary-Cards
+
+on:
+  schedule:
+    - cron: "0 0 * * *"   # tous les jours à minuit
+  workflow_dispatch:       # pour lancer manuellement
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: generate
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_CARD_TOKEN }}   # ton PAT, pas le GITHUB_TOKEN par défaut
+        with:
+          USERNAME: SKYLXN                                 # ton pseudo GitHub
+          BRANCH_NAME: main                                # ou master selon ton repo
+          UTC_OFFSET: 1
+          AUTO_PUSH: true
