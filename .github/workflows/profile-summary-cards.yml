@@ -2,24 +2,24 @@ name: GitHub-Profile-Summary-Cards
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # tous les jours à minuit UTC
-  workflow_dispatch:       # pour lancer manuellement
+    - cron: "0 0 * * 1"  
+  workflow_dispatch:      
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write       # permission explicite pour écrire dans le repo
+      contents: write      
     name: generate
 
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.SUMMARY_CARD_TOKEN }}  # utilise ton PAT pour checkout aussi
+          token: ${{ secrets.SUMMARY_CARD_TOKEN }}  
 
       - uses: vn7n24fzkq/github-profile-summary-cards@release
         env:
-          GITHUB_TOKEN: ${{ secrets.SUMMARY_CARD_TOKEN }}   # ton PAT avec accès aux repos privés
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_CARD_TOKEN }} 
         with:
           USERNAME: SKYLXN
           BRANCH_NAME: main
